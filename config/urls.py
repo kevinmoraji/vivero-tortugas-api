@@ -19,6 +19,7 @@ from django.urls import include, path
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("api/", include("vivero.urls")),
 ]
 
 handler404 = "core.exceptions.vista_404"
