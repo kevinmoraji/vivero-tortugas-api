@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     "django_filters",
     "core",
     "voluntarios",
+    "usuarios",
 ]
 
 MIDDLEWARE = [
