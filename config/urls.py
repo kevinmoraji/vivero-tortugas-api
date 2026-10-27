@@ -5,6 +5,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/auth/", include("usuarios.urls")),
     path("api/", include("vivero.urls")),
+    path("api/", include("voluntarios.urls")),
 ]
 
 handler404 = "core.exceptions.vista_404"
