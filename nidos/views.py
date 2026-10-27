@@ -25,10 +25,13 @@ class NidoViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         nidos = super().get_queryset()
         if self.action == "retrieve":
-            # prefetch_related trae los voluntarios del turno en una sola consulta extra
-            nidos = nidos.prefetch_related("turno__asignaciones__voluntario")
+            # select_related trae la eclosión (1:1) con un JOIN;
+            # prefetch_related trae los voluntarios del turno en una consulta extra
+            nidos = nidos.select_related("eclosion").prefetch_related(
+                "turno__asignaciones__voluntario"
+            )
         return nidos
-
+    
     def get_serializer_class(self):
         return NidoDetalleSerializer if self.action == "retrieve" else NidoSerializer
 
