@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "patrullajes",
     "nidos",
     "nacimientos",
+    "reportes",
 ]
 
 MIDDLEWARE = [
