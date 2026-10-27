@@ -22,6 +22,12 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "django_filters",
     "core",
+    "vivero",
+    "usuarios",
+    "voluntarios",
+    "patrullajes",
+    "nidos",
+    "nacimientos",
 ]
 
 MIDDLEWARE = [
