@@ -86,7 +86,7 @@ test_crear_voluntario_responde_201 (voluntarios.tests.VoluntarioTests.test_crear
 test_email_duplicado_responde_400 (voluntarios.tests.VoluntarioTests.test_email_duplicado_responde_400) ... ok
 
 ----------------------------------------------------------------------
-Ran 51 tests in 7.567s
+Ran 51 tests in 5.397s
 
 OK
 Destroying test database for alias 'default' ('test_vivero_tortugas')...
