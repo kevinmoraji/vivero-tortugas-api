@@ -179,8 +179,6 @@ Cada solicitud recorre este flujo:
 
 | Integrante | Usuario GitHub | Aportes principales |
 |---|---|---|
-| (nombre completo) | kevinmoraji | Configuración inicial, módulo vivero, patrullajes, pruebas de vivero y patrullajes, colección de Postman |
-| (nombre completo) | jimeninis | Autenticación, módulo nidos, datos base de pruebas, pruebas de usuarios y nidos, documentación |
-| (Angelina Jiménez Salas) | AngJS11 | Módulo voluntarios, nacimientos, reportes y datos demo, pruebas de voluntarios, nacimientos y reportes |
-
-Cada módulo se integró a `develop` por Pull Request con revisión cruzada (ver pestaña **Pull requests** del repositorio).
+| (Kevin Mora Jiménez) | kevinmoraji | Configuración inicial del proyecto, módulo vivero, módulo patrullajes, pruebas de vivero y patrullajes, colección de Postman |
+| (Jimena Fonseca Alvarado) | jimeninis | Autenticación por token, módulo nidos, datos base de las pruebas, pruebas de usuarios y nidos |
+| (Angelina Jiménez salas) | AngJS11 | Módulo voluntarios, módulo nacimientos, reportes y datos demo, pruebas de voluntarios, nacimientos y reportes, documentación (README y documento técnico) |
