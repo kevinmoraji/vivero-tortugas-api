@@ -1,0 +1,1575 @@
+{
+  "info": {
+    "_postman_id": "e7a9855d-e286-431b-8800-a607a96e9018",
+    "name": "Vivero Tortugas API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "45450325",
+    "_collection_link": "https://go.postman.co/collection/45450325-e7a9855d-e286-431b-8800-a607a96e9018?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Autenticación",
+      "item": [
+        {
+          "name": "Login admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Login coordinador responde 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\nconst respuesta = pm.response.json();\r\npm.environment.set(\"token_coordinador\", respuesta.token);\r\npm.test(\"El rol es Coordinador\", function () {\r\n    pm.expect(respuesta.roles).to.include(\"Coordinador\");\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"username\": \"coordinador\", \"password\": \"{{clave}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login coordinador",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Login admin responde 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\npm.environment.set(\"token_admin\", pm.response.json().token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"username\": \"admin\", \"password\": \"{{clave}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login consulta",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Login consulta responde 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\npm.environment.set(\"token_consulta\", pm.response.json().token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"username\": \"consulta\", \"password\": \"{{clave}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login con clave incorrecta (401)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Clave incorrecta responde 401\", function () {\r\n    pm.response.to.have.status(401);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"username\": \"admin\", \"password\": \"clave-incorrecta\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Ver mi perfil",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Perfil responde 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\npm.test(\"Es el usuario coordinador\", function () {\r\n    pm.expect(pm.response.json().usuario).to.eql(\"coordinador\");\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/auth/me/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "me",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Vivero",
+      "item": [
+        {
+          "name": "Listar playas",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Listar playas responde 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\nconst respuesta = pm.response.json();\r\npm.test(\"La respuesta viene paginada\", function () {\r\n    pm.expect(respuesta).to.have.property(\"count\");\r\n    pm.expect(respuesta).to.have.property(\"results\");\r\n});\r\npm.environment.set(\"playa_id\", respuesta.results[0].id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/playas/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "playas",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Crear playa (admin)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Crear playa responde 201\", function () {\r\n    pm.response.to.have.status(201);\r\n});\r\npm.environment.set(\"playa_nueva_id\", pm.response.json().id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "Token {{token_admin}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\": \"Playa Hermosa {{$timestamp}}\", \"provincia\": \"Guanacaste\", \"canton\": \"Santa Cruz\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/playas/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "playas",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Crear playa como coordinador (403)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"El coordinador no modifica el catálogo: 403\", function () {\r\n    pm.response.to.have.status(403);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\": \"Playa no permitida\", \"provincia\": \"Limón\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/playas/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "playas",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Crear sector (admin)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Crear sector responde 201\", function () {\r\n    pm.response.to.have.status(201);\r\n});\r\nconst respuesta = pm.response.json();\r\npm.environment.set(\"sector_nuevo_id\", respuesta.id);\r\npm.test(\"El código se guarda en mayúsculas\", function () {\r\n    pm.expect(respuesta.codigo).to.eql(\"Z-01\");\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "Token {{token_admin}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"playa\": {{playa_nueva_id}}, \"codigo\": \"z-01\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/sectores/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "sectores",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Voluntarios",
+      "item": [
+        {
+          "name": "Crear voluntario",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Crear voluntario responde 201\", function () {\r\n    pm.response.to.have.status(201);\r\n});\r\nconst respuesta = pm.response.json();\r\npm.environment.set(\"voluntario_id\", respuesta.id);\r\npm.test(\"La cédula tiene 9 dígitos\", function () {\r\n    pm.expect(respuesta.cedula).to.match(/^\\d{9}$/);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"cedula\": \"208080989\",\r\n  \"nombre\": \"Daniela\",\r\n  \"apellidos\": \"Vega Vega\",\r\n  \"email\": \"voluntario{{$timestamp}}@ucr.ac.cr\",\r\n  \"telefono\": \"67456789\",\r\n  \"fecha_ingreso\": \"{{ayer}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/voluntarios/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "voluntarios",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Cédula inválida (400)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Cédula inválida responde 400\", function () {\r\n    pm.response.to.have.status(400);\r\n});\r\npm.test(\"El error indica el campo cedula\", function () {\r\n    pm.expect(pm.response.json()).to.have.property(\"cedula\");\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"cedula\": \"12AB\",\r\n  \"nombre\": \"Mario\",\r\n  \"apellidos\": \"Mora\",\r\n  \"email\": \"mario@ucr.ac.cr\",\r\n  \"fecha_ingreso\": \"2026-01-10\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/voluntarios/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "voluntarios",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar voluntario",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Búsqueda responde 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\npm.test(\"Encuentra al menos un voluntario\", function () {\r\n    pm.expect(pm.response.json().count).to.be.above(0);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/voluntarios/?search=solano",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "voluntarios",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "solano"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Patrullajes",
+      "item": [
+        {
+          "name": "Crear turno",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Crear turno responde 201\", function () {\r\n    pm.response.to.have.status(201);\r\n});\r\nconst respuesta = pm.response.json();\r\npm.environment.set(\"turno_id\", respuesta.id);\r\npm.test(\"El turno empieza con todo el cupo disponible\", function () {\r\n    pm.expect(respuesta.cupo_disponible).to.eql(3);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"playa\": {{playa_nueva_id}},\r\n  \"inicio\": \"{{ayer}}T19:00:00-06:00\",\r\n  \"fin\": \"{{ayer}}T23:00:00-06:00\",\r\n  \"cupo_maximo\": 3\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/turnos/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "turnos",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Turno con horario inválido (400)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Horario inválido responde 400\", function () {\r\n    pm.response.to.have.status(400);\r\n});\r\npm.test(\"El error indica el campo fin\", function () {\r\n    pm.expect(pm.response.json()).to.have.property(\"fin\");\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"playa\": {{playa_nueva_id}},\r\n  \"inicio\": \"{{ayer}}T22:00:00-06:00\",\r\n  \"fin\": \"{{ayer}}T20:00:00-06:00\",\r\n  \"cupo_maximo\": 3\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/turnos/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "turnos",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Asignar voluntario al turno",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Asignar voluntario responde 201\", function () {\r\n    pm.response.to.have.status(201);\r\n});\r\npm.test(\"Queda asignado como líder\", function () {\r\n    pm.expect(pm.response.json().rol).to.eql(\"LIDER\");\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"voluntario\": {{voluntario_id}}, \"rol\": \"LIDER\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/turnos/{{turno_id}}/asignar/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "turnos",
+                "{{turno_id}}",
+                "asignar",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Asignar el mismo voluntario otra vez (409)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Asignación repetida responde 409\", function () {\r\n    pm.response.to.have.status(409);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"voluntario\": {{voluntario_id}}, \"rol\": \"LIDER\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/turnos/{{turno_id}}/asignar/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "turnos",
+                "{{turno_id}}",
+                "asignar",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Filtrar turnos con paginación",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Filtrar turnos responde 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\nconst respuesta = pm.response.json();\r\npm.test(\"Devuelve máximo 5 por página\", function () {\r\n    pm.expect(respuesta.results.length).to.be.at.most(5);\r\n});\r\npm.test(\"Hay más páginas\", function () {\r\n    pm.expect(respuesta.next).to.not.be.null;\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/turnos/?playa={{playa_id}}&page_size=5",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "turnos",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "playa",
+                  "value": "{{playa_id}}"
+                },
+                {
+                  "key": "page_size",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Nidos",
+      "item": [
+        {
+          "name": "Crear nido",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Crear nido responde 201\", function () {\r\n    pm.response.to.have.status(201);\r\n});\r\nconst respuesta = pm.response.json();\r\npm.environment.set(\"nido_id\", respuesta.id);\r\npm.test(\"El nido empieza incubando\", function () {\r\n    pm.expect(respuesta.estado).to.eql(\"INCUBANDO\");\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"codigo\": \"PRB-{{$timestamp}}\",\r\n  \"especie\": \"LORA\",\r\n  \"playa\": {{playa_nueva_id}},\r\n  \"turno\": {{turno_id}},\r\n  \"sector\": {{sector_nuevo_id}},\r\n  \"fecha_siembra\": \"{{ayer}}\",\r\n  \"huevos\": 95\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/nidos/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "nidos",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Sector ocupado (400)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Sector ocupado responde 400\", function () {\r\n    pm.response.to.have.status(400);\r\n});\r\npm.test(\"El error indica el campo sector\", function () {\r\n    pm.expect(pm.response.json()).to.have.property(\"sector\");\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"codigo\": \"PRB2-{{$timestamp}}\",\r\n  \"especie\": \"VERDE\",\r\n  \"playa\": {{playa_nueva_id}},\r\n  \"turno\": {{turno_id}},\r\n  \"sector\": {{sector_nuevo_id}},\r\n  \"fecha_siembra\": \"{{ayer}}\",\r\n  \"huevos\": 80\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/nidos/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "nidos",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Huevos fuera de rango (400)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Huevos fuera de rango responde 400\", function () {\r\n    pm.response.to.have.status(400);\r\n});\r\npm.test(\"El error indica el campo huevos\", function () {\r\n    pm.expect(pm.response.json()).to.have.property(\"huevos\");\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"codigo\": \"PRB3-{{$timestamp}}\",\r\n  \"especie\": \"LORA\",\r\n  \"playa\": {{playa_nueva_id}},\r\n  \"turno\": {{turno_id}},\r\n  \"sector\": {{sector_nuevo_id}},\r\n  \"fecha_siembra\": \"{{ayer}}\",\r\n  \"huevos\": 250\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/nidos/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "nidos",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Filtrar y ordenar nidos",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Filtrar nidos responde 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\nconst resultados = pm.response.json().results;\r\npm.test(\"Todos son tortuga lora incubando\", function () {\r\n    resultados.forEach(function (nido) {\r\n        pm.expect(nido.especie).to.eql(\"LORA\");\r\n        pm.expect(nido.estado).to.eql(\"INCUBANDO\");\r\n    });\r\n});\r\npm.test(\"Vienen ordenados de más a menos huevos\", function () {\r\n    for (let posicion = 1; posicion < resultados.length; posicion++) {\r\n        pm.expect(resultados[posicion - 1].huevos).to.be.at.least(resultados[posicion].huevos);\r\n    }\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/nidos/?especie=LORA&estado=INCUBANDO&ordering=-huevos",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "nidos",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "especie",
+                  "value": "LORA"
+                },
+                {
+                  "key": "estado",
+                  "value": "INCUBANDO"
+                },
+                {
+                  "key": "ordering",
+                  "value": "-huevos"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Nido inexistente (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Nido inexistente responde 404\", function () {\r\n    pm.response.to.have.status(404);\r\n});\r\npm.test(\"Mensaje uniforme de no encontrado\", function () {\r\n    pm.expect(pm.response.json().detail).to.eql(\"Recurso no encontrado.\");\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/nidos/999/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "nidos",
+                "999",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Nacimientos",
+      "item": [
+        {
+          "name": "Buscar nido listo para eclosionar",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Reporte responde 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\nconst nidosListos = pm.response.json();\r\npm.test(\"Hay al menos un nido listo\", function () {\r\n    pm.expect(nidosListos.length).to.be.above(0);\r\n});\r\nconst nidoListo = nidosListos[0];\r\npm.environment.set(\"nido_listo_id\", nidoListo.id);\r\n// El conteo tiene que sumar exactamente los huevos del nido (RN-12)\r\npm.environment.set(\"crias_vivas\", nidoListo.huevos - 10);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/reportes/proximos-a-eclosionar/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "reportes",
+                "proximos-a-eclosionar",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Registrar eclosión",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Registrar eclosión responde 201\", function () {\r\n    pm.response.to.have.status(201);\r\n});\r\nconst respuesta = pm.response.json();\r\npm.environment.set(\"eclosion_id\", respuesta.id);\r\npm.test(\"Calcula la tasa de eclosión\", function () {\r\n    pm.expect(respuesta.tasa_eclosion).to.be.above(0);\r\n});\r\npm.test(\"Todas las crías están pendientes de liberar\", function () {\r\n    pm.expect(respuesta.crias_pendientes).to.eql(respuesta.crias_vivas);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nido\": {{nido_listo_id}},\r\n  \"fecha\": \"{{hoy}}\",\r\n  \"crias_vivas\": {{crias_vivas}},\r\n  \"crias_muertas\": 5,\r\n  \"huevos_sin_desarrollo\": 5\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/eclosiones/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "eclosiones",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Segunda eclosión del mismo nido (409)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Segunda eclosión responde 409\", function () {\r\n    pm.response.to.have.status(409);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nido\": {{nido_listo_id}},\r\n  \"fecha\": \"{{hoy}}\",\r\n  \"crias_vivas\": {{crias_vivas}},\r\n  \"crias_muertas\": 5,\r\n  \"huevos_sin_desarrollo\": 5\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/eclosiones/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "eclosiones",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Liberar crías",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Liberar crías responde 201\", function () {\r\n    pm.response.to.have.status(201);\r\n});\r\npm.environment.set(\"liberacion_id\", pm.response.json().id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"eclosion\": {{eclosion_id}},\r\n  \"responsable\": {{voluntario_id}},\r\n  \"fecha\": \"{{hoy}}\",\r\n  \"cantidad\": 10\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/liberaciones/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "liberaciones",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Editar una liberación (405)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Las liberaciones no se editan: 405\", function () {\r\n    pm.response.to.have.status(405);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"cantidad\": 5}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/liberaciones/{{liberacion_id}}/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "liberaciones",
+                "{{liberacion_id}}",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Reportes",
+      "item": [
+        {
+          "name": "Resumen por playa",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Resumen por playa responde 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\npm.test(\"Cada playa trae su tasa de eclosión\", function () {\r\n    pm.response.json().forEach(function (fila) {\r\n        pm.expect(fila).to.have.property(\"tasa_eclosion\");\r\n    });\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/reportes/resumen-playas/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "reportes",
+                "resumen-playas",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Ocupación del vivero",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Ocupación responde 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\npm.test(\"Cada playa trae sectores ocupados y libres\", function () {\r\n    pm.response.json().forEach(function (fila) {\r\n        pm.expect(fila).to.have.property(\"ocupados\");\r\n        pm.expect(fila).to.have.property(\"libres\");\r\n    });\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/reportes/ocupacion-vivero/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "reportes",
+                "ocupacion-vivero",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Ranking de voluntarios",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Ranking responde 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\npm.test(\"Máximo 5 voluntarios\", function () {\r\n    pm.expect(pm.response.json().length).to.be.at.most(5);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/reportes/ranking-voluntarios/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "reportes",
+                "ranking-voluntarios",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Errores",
+      "item": [
+        {
+          "name": "Sin token (401)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Sin token responde 401\", function () {\r\n    pm.response.to.have.status(401);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/nidos/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "nidos",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Consulta intenta crear un nido (403)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Rol Consulta no puede crear: 403\", function () {\r\n    pm.response.to.have.status(403);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "Token {{token_consulta}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"codigo\": \"NO-PERMITIDO\", \"huevos\": 50}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/nidos/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "nidos",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Coordinador intenta borrar un voluntario (403)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Coordinador no puede borrar: 403\", function () {\r\n    pm.response.to.have.status(403);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/voluntarios/{{voluntario_id}}/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "voluntarios",
+                "{{voluntario_id}}",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Admin borra voluntario con historial (409)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Voluntario con turnos no se borra: 409\", function () {\r\n    pm.response.to.have.status(409);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "value",
+                  "value": "Token {{token_admin}}",
+                  "type": "string"
+                },
+                {
+                  "key": "key",
+                  "value": "Authorization",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/voluntarios/{{voluntario_id}}/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "voluntarios",
+                "{{voluntario_id}}",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Desactivar sector ocupado (400)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Sector con nido no se desactiva: 400\", function () {\r\n    pm.response.to.have.status(400);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "Token {{token_admin}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"activo\": false}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/sectores/{{sector_nuevo_id}}/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "sectores",
+                "{{sector_nuevo_id}}",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Crear playa temporal (admin)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Crear playa temporal responde 201\", function () {\r\n    pm.response.to.have.status(201);\r\n});\r\npm.environment.set(\"playa_temporal_id\", pm.response.json().id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "Token {{token_admin}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\": \"Playa Temporal {{$timestamp}}\", \"provincia\": \"Puntarenas\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/playas/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "playas",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Borrar playa temporal (204)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Borrar playa sin historial responde 204\", function () {\r\n    pm.response.to.have.status(204);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "Token {{token_admin}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/playas/{{playa_temporal_id}}/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "playas",
+                "{{playa_temporal_id}}",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "Token {{token_coordinador}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "exec": [
+          "const ahoraCostaRica = new Date(Date.now() - 6 * 60 * 60 * 1000);\r",
+          "const ayerCostaRica = new Date(ahoraCostaRica.getTime() - 24 * 60 * 60 * 1000);\r",
+          "pm.environment.set(\"hoy\", ahoraCostaRica.toISOString().slice(0, 10));\r",
+          "pm.environment.set(\"ayer\", ayerCostaRica.toISOString().slice(0, 10));"
+        ],
+        "type": "text/javascript"
+      }
+    }
+  ]
+}
