@@ -1,0 +1,94 @@
+Creating test database for alias 'default' ('test_vivero_tortugas')...
+Found 51 test(s).
+Operations to perform:
+  Synchronize unmigrated apps: django_filters, messages, rest_framework, staticfiles
+  Apply all migrations: admin, auth, authtoken, contenttypes, nacimientos, nidos, patrullajes, sessions, vivero, voluntarios
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying auth.0012_alter_user_first_name_max_length... OK
+  Applying authtoken.0001_initial... OK
+  Applying authtoken.0002_auto_20160226_1747... OK
+  Applying authtoken.0003_tokenproxy... OK
+  Applying authtoken.0004_alter_tokenproxy_options... OK
+  Applying voluntarios.0001_initial... OK
+  Applying vivero.0001_initial... OK
+  Applying patrullajes.0001_initial... OK
+  Applying nidos.0001_initial... OK
+  Applying nacimientos.0001_initial... OK
+  Applying sessions.0001_initial...test_conteo_que_no_cuadra_responde_400 (nacimientos.tests.EclosionTests.test_conteo_que_no_cuadra_responde_400) ... ok
+test_eclosion_antes_de_45_dias_responde_400 (nacimientos.tests.EclosionTests.test_eclosion_antes_de_45_dias_responde_400) ... ok
+test_registrar_eclosion_cierra_el_nido (nacimientos.tests.EclosionTests.test_registrar_eclosion_cierra_el_nido) ... ok
+test_segunda_eclosion_del_mismo_nido_responde_409 (nacimientos.tests.EclosionTests.test_segunda_eclosion_del_mismo_nido_responde_409) ... ok
+test_liberacion_no_se_edita_responde_405 (nacimientos.tests.LiberacionTests.test_liberacion_no_se_edita_responde_405) ... ok
+test_liberar_crias_responde_201 (nacimientos.tests.LiberacionTests.test_liberar_crias_responde_201) ... ok
+test_no_libera_mas_crias_de_las_vivas (nacimientos.tests.LiberacionTests.test_no_libera_mas_crias_de_las_vivas) ... ok
+test_patch_no_baja_vivas_por_debajo_de_liberadas (nacimientos.tests.LiberacionTests.test_patch_no_baja_vivas_por_debajo_de_liberadas) ... ok
+test_responsable_inactivo_responde_400 (nacimientos.tests.LiberacionTests.test_responsable_inactivo_responde_400) ... ok
+test_crear_nido_responde_201 (nidos.tests.NidoTests.test_crear_nido_responde_201) ... ok
+test_detalle_incluye_voluntarios_del_turno (nidos.tests.NidoTests.test_detalle_incluye_voluntarios_del_turno) ... ok
+test_estado_no_se_edita_manualmente (nidos.tests.NidoTests.test_estado_no_se_edita_manualmente) ... ok
+test_fecha_distinta_a_la_del_turno_responde_400 (nidos.tests.NidoTests.test_fecha_distinta_a_la_del_turno_responde_400) ... ok
+test_filtros_combinables_y_ordenamiento (nidos.tests.NidoTests.test_filtros_combinables_y_ordenamiento) ... ok
+test_huevos_fuera_de_rango_responde_400 (nidos.tests.NidoTests.test_huevos_fuera_de_rango_responde_400) ... ok
+test_marcar_perdido_libera_el_sector (nidos.tests.NidoTests.test_marcar_perdido_libera_el_sector) ... ok
+test_nido_inexistente_responde_404 (nidos.tests.NidoTests.test_nido_inexistente_responde_404) ... ok
+test_patch_no_modifica_nido_cerrado (nidos.tests.NidoTests.test_patch_no_modifica_nido_cerrado) ... ok
+test_sector_de_otra_playa_responde_400 (nidos.tests.NidoTests.test_sector_de_otra_playa_responde_400) ... ok
+test_sector_ocupado_responde_400 (nidos.tests.NidoTests.test_sector_ocupado_responde_400) ... ok
+test_asignacion_repetida_responde_409 (patrullajes.tests.TurnoTests.test_asignacion_repetida_responde_409) ... ok
+test_asignar_voluntario_responde_201 (patrullajes.tests.TurnoTests.test_asignar_voluntario_responde_201) ... ok
+test_crear_turno_responde_201 (patrullajes.tests.TurnoTests.test_crear_turno_responde_201) ... ok
+test_filtros_combinables_y_paginacion (patrullajes.tests.TurnoTests.test_filtros_combinables_y_paginacion) ... ok
+test_no_asigna_voluntario_inactivo (patrullajes.tests.TurnoTests.test_no_asigna_voluntario_inactivo) ... ok
+test_no_permite_turnos_traslapados (patrullajes.tests.TurnoTests.test_no_permite_turnos_traslapados) ... ok
+test_no_supera_cupo_maximo (patrullajes.tests.TurnoTests.test_no_supera_cupo_maximo) ... ok
+test_patch_no_reduce_cupo_bajo_asignados (patrullajes.tests.TurnoTests.test_patch_no_reduce_cupo_bajo_asignados) ... ok
+test_turno_con_fin_antes_de_inicio_responde_400 (patrullajes.tests.TurnoTests.test_turno_con_fin_antes_de_inicio_responde_400) ... ok
+test_ocupacion_del_vivero (reportes.tests.ReportesTests.test_ocupacion_del_vivero) ... ok
+test_proximos_a_eclosionar (reportes.tests.ReportesTests.test_proximos_a_eclosionar) ... ok
+test_ranking_de_voluntarios (reportes.tests.ReportesTests.test_ranking_de_voluntarios) ... ok
+test_resumen_por_playa_calcula_tasa (reportes.tests.ReportesTests.test_resumen_por_playa_calcula_tasa) ... ok
+test_coordinador_no_puede_borrar_responde_403 (usuarios.tests.AutenticacionYPermisosTests.test_coordinador_no_puede_borrar_responde_403) ... ok
+test_login_con_clave_incorrecta_responde_401 (usuarios.tests.AutenticacionYPermisosTests.test_login_con_clave_incorrecta_responde_401) ... ok
+test_login_correcto_devuelve_token_y_rol (usuarios.tests.AutenticacionYPermisosTests.test_login_correcto_devuelve_token_y_rol) ... ok
+test_rol_consulta_no_puede_crear_responde_403 (usuarios.tests.AutenticacionYPermisosTests.test_rol_consulta_no_puede_crear_responde_403) ... ok
+test_rol_consulta_si_puede_leer (usuarios.tests.AutenticacionYPermisosTests.test_rol_consulta_si_puede_leer) ... ok
+test_sin_token_responde_401 (usuarios.tests.AutenticacionYPermisosTests.test_sin_token_responde_401) ... ok
+test_admin_borra_voluntario_sin_historial_204 (vivero.tests.VoluntarioTests.test_admin_borra_voluntario_sin_historial_204) ... ok
+test_borrar_voluntario_con_turnos_responde_409 (vivero.tests.VoluntarioTests.test_borrar_voluntario_con_turnos_responde_409) ... ok
+test_busqueda_por_nombre (vivero.tests.VoluntarioTests.test_busqueda_por_nombre) ... ok
+test_cedula_invalida_responde_400 (vivero.tests.VoluntarioTests.test_cedula_invalida_responde_400) ... ok
+test_crear_voluntario_responde_201 (vivero.tests.VoluntarioTests.test_crear_voluntario_responde_201) ... ok
+test_email_duplicado_responde_400 (vivero.tests.VoluntarioTests.test_email_duplicado_responde_400) ... ok
+test_admin_borra_voluntario_sin_historial_204 (voluntarios.tests.VoluntarioTests.test_admin_borra_voluntario_sin_historial_204) ... ok
+test_borrar_voluntario_con_turnos_responde_409 (voluntarios.tests.VoluntarioTests.test_borrar_voluntario_con_turnos_responde_409) ... ok
+test_busqueda_por_nombre (voluntarios.tests.VoluntarioTests.test_busqueda_por_nombre) ... ok
+test_cedula_invalida_responde_400 (voluntarios.tests.VoluntarioTests.test_cedula_invalida_responde_400) ... ok
+test_crear_voluntario_responde_201 (voluntarios.tests.VoluntarioTests.test_crear_voluntario_responde_201) ... ok
+test_email_duplicado_responde_400 (voluntarios.tests.VoluntarioTests.test_email_duplicado_responde_400) ... ok
+
+----------------------------------------------------------------------
+Ran 51 tests in 5.397s
+
+OK
+Destroying test database for alias 'default' ('test_vivero_tortugas')...
+ OK
+System check identified no issues (0 silenced).
