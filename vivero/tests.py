@@ -1,45 +1,41 @@
 from core.pruebas_base import PruebaBase
+from vivero.models import Playa
 
 
-class VoluntarioTests(PruebaBase):
-    def datos(self, **cambios):
-        base = {
-            "cedula": "205550666", "nombre": "Sofía", "apellidos": "Castro Méndez",
-            "email": "sofia@correo.test", "fecha_ingreso": "2026-01-10",
-        }
-        base.update(cambios)
-        return base
-
-    def test_crear_voluntario_responde_201(self):
-        self.como("coordinador")
-        respuesta = self.client.post("/api/voluntarios/", self.datos(cedula="6-0555-0666"))
-        self.assertEqual(respuesta.status_code, 201)
-        self.assertEqual(respuesta.data["cedula"], "605550666")  # se normaliza sin guiones
-
-    def test_cedula_invalida_responde_400(self):
-        self.como("coordinador")
-        respuesta = self.client.post("/api/voluntarios/", self.datos(cedula="12AB"))
-        self.assertEqual(respuesta.status_code, 400)
-        self.assertIn("cedula", respuesta.data)
-
-    def test_email_duplicado_responde_400(self):
-        self.como("coordinador")
-        respuesta = self.client.post("/api/voluntarios/", self.datos(email="ana@correo.test"))
-        self.assertEqual(respuesta.status_code, 400)
-
-    def test_busqueda_por_nombre(self):
-        self.como("consulta")
-        respuesta = self.client.get("/api/voluntarios/?search=quesada")
-        self.assertEqual(respuesta.status_code, 200)
-        self.assertEqual(respuesta.data["count"], 1)
-        self.assertEqual(respuesta.data["results"][0]["nombre"], "Luis")
-
-    def test_borrar_voluntario_con_turnos_responde_409(self):
+class PlayaCrudTests(PruebaBase):
+    def test_crud_completo_de_playa(self):
         self.como("admin")
-        respuesta = self.client.delete(f"/api/voluntarios/{self.ana.id}/")
+        respuesta = self.client.post("/api/playas/", {"nombre": "Playa Caletas", "provincia": "Puntarenas"})
+        self.assertEqual(respuesta.status_code, 201)
+        playa_id = respuesta.data["id"]
+
+        respuesta = self.client.get(f"/api/playas/{playa_id}/")
+        self.assertEqual(respuesta.status_code, 200)
+
+        respuesta = self.client.patch(f"/api/playas/{playa_id}/", {"canton": "Puntarenas"}, format="json")
+        self.assertEqual(respuesta.status_code, 200)
+        self.assertEqual(respuesta.data["canton"], "Puntarenas")
+
+        respuesta = self.client.delete(f"/api/playas/{playa_id}/")
+        self.assertEqual(respuesta.status_code, 204)
+        self.assertFalse(Playa.objects.filter(pk=playa_id).exists())
+
+    def test_nombre_de_playa_duplicado_responde_400(self):
+        self.como("admin")
+        respuesta = self.client.post("/api/playas/", {"nombre": "Playa Ostional", "provincia": "Guanacaste"})
+        self.assertEqual(respuesta.status_code, 400)
+
+    def test_borrar_playa_con_nidos_responde_409(self):
+        self.como("admin")
+        respuesta = self.client.delete(f"/api/playas/{self.playa.id}/")
         self.assertEqual(respuesta.status_code, 409)
 
-    def test_admin_borra_voluntario_sin_historial_204(self):
+    def test_coordinador_no_modifica_catalogo_responde_403(self):
+        self.como("coordinador")
+        respuesta = self.client.post("/api/playas/", {"nombre": "Playa Nueva", "provincia": "Limón"})
+        self.assertEqual(respuesta.status_code, 403)
+
+    def test_patch_no_desactiva_sector_ocupado(self):
         self.como("admin")
-        respuesta = self.client.delete(f"/api/voluntarios/{self.luis.id}/")
-        self.assertEqual(respuesta.status_code, 204)
+        respuesta = self.client.patch(f"/api/sectores/{self.sector1.id}/", {"activo": False}, format="json")
+        self.assertEqual(respuesta.status_code, 400)
