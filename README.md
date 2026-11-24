@@ -38,6 +38,17 @@ En [`docs/DOCUMENTO_TECNICO.md`](docs/DOCUMENTO_TECNICO.md) están:
 
 ---
 
+## Frontend (Proyecto 2)
+
+La carpeta [`frontend/`](frontend/) tiene la aplicación web en React que consume esta API: login con roles, Inicio con reportes y pantallas para todos los módulos.
+
+- Instalación y ejecución: [`frontend/README.md`](frontend/README.md)
+- Pantallas, endpoints, permisos en pantalla y escenarios de prueba: [`docs/FRONTEND.md`](docs/FRONTEND.md)
+
+En resumen: con el backend encendido, en otra terminal `cd frontend`, `npm install` y `npm run dev`, y abrir http://localhost:5173.
+
+---
+
 ## Requisitos
 
 - Python 3.11 o superior
@@ -161,7 +172,8 @@ nidos/          Nido
 nacimientos/    Eclosion, Liberacion + services.py con reglas
 reportes/       consultas.py con las consultas ORM
 postman/        colección y entorno
-docs/           documento técnico y plan de trabajo en Git
+frontend/       aplicación React (Proyecto 2)
+docs/           documento técnico, documento del frontend y capturas
 ```
 
 Cada solicitud recorre este flujo:
@@ -170,7 +182,6 @@ Cada solicitud recorre este flujo:
 
 ## Limitaciones conocidas
 
-- **No hay frontend.** Por requisito del proyecto, la API se usa desde Postman.
 - **Los usuarios del sistema y los voluntarios son entidades separadas.** Un voluntario no inicia sesión; los registra un coordinador.
 - **No hay notificaciones automáticas.** Por ejemplo, el sistema no avisa cuando un nido está por eclosionar. Esa información se consulta con `GET /api/reportes/proximos-a-eclosionar/`.
 - **Las liberaciones no se pueden editar ni borrar**, por trazabilidad. Para corregir un error, el administrador debe anular la eclosión antes de que haya liberaciones.
