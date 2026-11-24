@@ -1,6 +1,7 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 
 import { useSesion } from "../contextos/ContextoSesion";
+import LogoTortuga from "./LogoTortuga";
 
 const ENLACES_DEL_MENU = [
   { ruta: "/", texto: "Inicio", icono: "bi-speedometer2" },
@@ -24,10 +25,10 @@ export default function Layout() {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-success">
+      <nav className="navbar navbar-expand-lg navbar-dark barra-oceano">
         <div className="container-fluid">
           <NavLink className="navbar-brand" to="/">
-            <i className="bi bi-heart-pulse me-2" />
+            <LogoTortuga tamano={34} />
             Vivero de Tortugas
           </NavLink>
           <button
@@ -63,6 +64,10 @@ export default function Layout() {
           </div>
         </div>
       </nav>
+      {/* Ola decorativa debajo de la barra */}
+      <svg className="ola-inferior" viewBox="0 0 1200 20" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 0 H1200 V8 C1050 20 900 0 750 8 C600 16 450 0 300 8 C150 16 75 4 0 10 Z" fill="var(--color-oceano)" opacity="0.35" />
+      </svg>
 
       <main className="container py-4">
         <Outlet />
