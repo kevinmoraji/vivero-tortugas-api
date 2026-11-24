@@ -29,9 +29,11 @@ INSTALLED_APPS = [
     "nidos",
     "nacimientos",
     "reportes",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -121,3 +123,10 @@ REST_FRAMEWORK = {
 }
 
 DIAS_MINIMOS_INCUBACION = config("DIAS_MINIMOS_INCUBACION", default=45, cast=int)
+
+#Proyecto 2: orígenes del frontend que pueden llamar a la API
+CORS_ALLOWED_ORIGINS = config(
+    "CORS_ALLOWED_ORIGINS",
+    default="http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174",
+    cast=Csv(),
+)
