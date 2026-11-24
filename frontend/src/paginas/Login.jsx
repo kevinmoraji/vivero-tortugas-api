@@ -3,6 +3,7 @@ import { Navigate, useLocation, useNavigate } from "react-router-dom";
 
 import { useSesion } from "../contextos/ContextoSesion";
 import { textoDelError } from "../api/errores";
+import LogoTortuga from "../componentes/LogoTortuga";
 
 export default function Login() {
   const { haySesion, iniciarSesion, avisoDeSesion } = useSesion();
@@ -15,7 +16,8 @@ export default function Login() {
   const [mensajeDeError, setMensajeDeError] = useState("");
   const [ingresando, setIngresando] = useState(false);
 
- const pantallaDeDestino = ubicacion.state?.desde ?? "/";
+  // Pantalla a la que quería entrar antes de que lo mandaran al login
+  const pantallaDeDestino = ubicacion.state?.desde ?? "/";
 
   if (haySesion) {
     return <Navigate to={pantallaDeDestino} replace />;
@@ -39,12 +41,13 @@ export default function Login() {
   };
 
   return (
-    <div className="min-vh-100 d-flex align-items-center justify-content-center px-3">
-      <div className="card shadow-sm" style={{ maxWidth: 400, width: "100%" }}>
+    <div className="fondo-playa d-flex align-items-center justify-content-center px-3">
+      <div className="card tarjeta-login" style={{ maxWidth: 400, width: "100%" }}>
         <div className="card-body p-4">
           <div className="text-center mb-4">
-            <i className="bi bi-heart-pulse text-success" style={{ fontSize: "2.5rem" }} />
+            <LogoTortuga tamano={72} />
             <h1 className="h4 mt-2 mb-0">Vivero de Tortugas</h1>
+            <p className="lema-login small mb-1">Cada nido cuenta, cada cría llega al mar</p>
             <p className="text-muted small">Ingrese con su usuario del sistema</p>
           </div>
 
