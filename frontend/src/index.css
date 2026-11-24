@@ -1,0 +1,178 @@
+:root {
+  --color-oceano-profundo: #0b4f6c;
+  --color-oceano: #12708f;
+  --color-turquesa: #1b998b;
+  --color-turquesa-oscuro: #157a6e;
+  --color-espuma: #e3f4f1;
+  --color-arena: #f7f1e3;
+  --color-arena-oscura: #e9dcc0;
+  --color-coral: #e76f51;
+  --color-caparazon: #8aa65b;
+  --color-caparazon-borde: #4f6b2c;
+  --color-aleta: #6f9a4f;
+
+  --bs-body-bg: #ffffff;
+  --bs-body-color: #1f3340;
+  --bs-success: #1b998b;
+  --bs-success-rgb: 27, 153, 139;
+  --bs-primary: #12708f;
+  --bs-primary-rgb: 18, 112, 143;
+  --bs-link-color: #12708f;
+  --bs-link-color-rgb: 18, 112, 143;
+  --bs-link-hover-color: #0b4f6c;
+  --bs-link-hover-color-rgb: 11, 79, 108;
+  --bs-border-radius: 0.6rem;
+}
+
+body {
+  background-color: var(--color-arena);
+  min-height: 100vh;
+}
+
+.btn-success {
+  --bs-btn-bg: var(--color-turquesa);
+  --bs-btn-border-color: var(--color-turquesa);
+  --bs-btn-hover-bg: var(--color-turquesa-oscuro);
+  --bs-btn-hover-border-color: var(--color-turquesa-oscuro);
+  --bs-btn-active-bg: var(--color-turquesa-oscuro);
+  --bs-btn-active-border-color: var(--color-turquesa-oscuro);
+  --bs-btn-disabled-bg: var(--color-turquesa);
+  --bs-btn-disabled-border-color: var(--color-turquesa);
+}
+
+.btn-outline-success {
+  --bs-btn-color: var(--color-turquesa);
+  --bs-btn-border-color: var(--color-turquesa);
+  --bs-btn-hover-bg: var(--color-turquesa);
+  --bs-btn-hover-border-color: var(--color-turquesa);
+  --bs-btn-active-bg: var(--color-turquesa-oscuro);
+}
+
+.btn-outline-primary {
+  --bs-btn-color: var(--color-oceano);
+  --bs-btn-border-color: var(--color-oceano);
+  --bs-btn-hover-bg: var(--color-oceano);
+  --bs-btn-hover-border-color: var(--color-oceano);
+  --bs-btn-active-bg: var(--color-oceano-profundo);
+}
+
+.text-bg-success {
+  background-color: var(--color-turquesa) !important;
+}
+
+.text-bg-primary {
+  background-color: var(--color-oceano) !important;
+}
+
+.text-success {
+  color: var(--color-turquesa) !important;
+}
+
+.barra-oceano {
+  background: linear-gradient(90deg, var(--color-oceano-profundo), var(--color-oceano) 60%, var(--color-turquesa));
+  box-shadow: 0 2px 10px rgba(11, 79, 108, 0.25);
+  position: relative;
+}
+
+.ola-inferior {
+  display: block;
+  width: 100%;
+  height: 18px;
+  margin-top: -1px;
+}
+
+.barra-oceano .navbar-brand {
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.barra-oceano .nav-link {
+  color: rgba(255, 255, 255, 0.8);
+  border-radius: 2rem;
+  padding: 0.35rem 0.8rem !important;
+  transition: background-color 0.15s;
+}
+
+.barra-oceano .nav-link:hover {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.barra-oceano .nav-link.active {
+  color: var(--color-oceano-profundo);
+  background-color: var(--color-espuma);
+  font-weight: 600;
+}
+
+.card {
+  border: 1px solid var(--color-arena-oscura);
+  box-shadow: 0 2px 8px rgba(31, 51, 64, 0.06);
+}
+
+.card-header {
+  background-color: var(--color-espuma);
+  color: var(--color-oceano-profundo);
+  font-weight: 600;
+  border-bottom-color: var(--color-arena-oscura);
+}
+
+.table {
+  --bs-table-bg: #fff;
+  --bs-table-hover-bg: var(--color-espuma);
+}
+
+.table-responsive {
+  border-radius: var(--bs-border-radius);
+  border: 1px solid var(--color-arena-oscura);
+}
+
+.table-responsive .table {
+  margin-bottom: 0;
+}
+
+.table-light {
+  --bs-table-bg: var(--color-espuma);
+  --bs-table-color: var(--color-oceano-profundo);
+}
+
+.modal-header {
+  background-color: var(--color-espuma);
+  color: var(--color-oceano-profundo);
+}
+
+h1.h3,
+h1.h4 {
+  color: var(--color-oceano-profundo);
+  font-weight: 700;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--color-turquesa);
+  box-shadow: 0 0 0 0.2rem rgba(27, 153, 139, 0.2);
+}
+
+.progress-bar.bg-success {
+  background-color: var(--color-turquesa) !important;
+}
+
+.fondo-playa {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 80% 15%, rgba(255, 214, 153, 0.55) 0, rgba(255, 214, 153, 0) 25%),
+    linear-gradient(180deg, var(--color-oceano-profundo) 0%, var(--color-oceano) 45%, var(--color-turquesa) 70%, var(--color-arena-oscura) 70.5%, var(--color-arena) 100%);
+}
+
+.tarjeta-login {
+  border: none;
+  border-radius: 1.2rem;
+  box-shadow: 0 12px 35px rgba(11, 79, 108, 0.35);
+}
+
+.lema-login {
+  color: var(--color-turquesa-oscuro);
+  font-style: italic;
+}
